@@ -15,7 +15,6 @@ import Blogs from "./components/Blogs";
 import SingleBlog from "./components/SingleBlog";
 import SignupPage from "./components/Signup";
 
-
 const intializeLogin = () => {
   if (window.localStorage.getItem("token")) {
     return true;
@@ -40,12 +39,23 @@ function App() {
       <Router>
         <Navbar bg="dark" variant="dark">
           <Nav className="mr-auto">
-            
-            <Link to="/"><Button variant="secondary">Home</Button></Link>
-            <Link to="/blogs"><Button variant="secondary">Blogs</Button></Link>
+            <Link to="/">
+              <Button variant="secondary">Home</Button>
+            </Link>
+            <Link to="/blogs">
+              <Button variant="secondary">Blogs</Button>
+            </Link>
+          </Nav>
+          <Nav className="ml-auto">
             <Button variant="secondary" onClick={logout}>
               {loggedIn ? "Sign out" : "Sign in"}
             </Button>
+
+            <Link to="/signup">
+              {loggedIn ? null : (
+                <Button variant="secondary">Create account</Button>
+              )}
+            </Link>
           </Nav>
         </Navbar>
 
@@ -62,12 +72,12 @@ function App() {
             {loggedIn ? <Blogs user={user} /> : <Redirect to="/login" />}
           </Route>
 
-          <Route exact path={'/blogs/:id'}>
-              <SingleBlog/>
+          <Route exact path={"/blogs/:id"}>
+            <SingleBlog />
           </Route>
 
-          <Route exact path='/signup'>
-            <SignupPage/>
+          <Route exact path="/signup">
+            <SignupPage />
           </Route>
         </Switch>
       </Router>

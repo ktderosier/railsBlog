@@ -49,9 +49,7 @@ export async function getBlogs() {
 export async function createBlog(data) {
     const res = await fetch(`/api/blogs`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: header,
         body: JSON.stringify(data)
     });
 }
@@ -69,10 +67,11 @@ export async function getSingleBlog(id) {
     return await res.json();
 }
 
-export async function editSingleBlog(id) {
+export async function editSingleBlog(id, formData) {
     const res = await fetch(`/api/blogs/${id}`, {
         method: 'PATCH',
-        headers: header
+        headers: header,
+        body: JSON.stringify(formData)
     });
 
     if(res.status > 299) {
