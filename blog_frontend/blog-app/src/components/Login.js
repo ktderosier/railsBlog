@@ -1,21 +1,18 @@
 import React, {useState} from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import {useHistory} from 'react-router-dom';
-import {loginApi} from '../api';
+import {loginApi, setToken} from '../api';
 
-const Login = () => {
+const Login = (props) => {
     const [formData, setFormData] = useState({});
     const history = useHistory();
 
     const updateData = (e) =>{
         const key = e.currentTarget.name;
-        console.log("key", key)
-        console.log("form data", formData)
 
         const value = e.currentTarget.value;
         let obj = {...formData}
         obj[key] = value;
-        console.log("obj", obj)
         setFormData(obj);
     }
 
@@ -26,9 +23,10 @@ const submit = async (e) => {
     const response = await loginApi(formData).catch((error) =>{
         console.log(error);
     })
-    console.log('response', response);
     window.localStorage.setItem('user', JSON.stringify(response.user));
     window.localStorage.setItem('token', response.user.token);
+    setToken(response.user.token);
+    props.setLoggedIn(true);
     history.push('/');
 }
 
