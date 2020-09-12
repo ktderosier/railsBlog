@@ -26,13 +26,13 @@ const CreateBlog = () => {
       console.log(error);
     });
     history.push("/blogs");
-    setFormData({
-      "title": " ",
-      "body": " ",
-      "author": " ",
-      "date": " "
-    });
-    window.location.reload(true);
+    // setFormData({
+    //   "title": " ",
+    //   "body": " ",
+    //   "author": " ",
+    //   "date": " "
+    // });
+  
   };
 
   return (

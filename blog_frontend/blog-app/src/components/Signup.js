@@ -1,36 +1,44 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { signupApi, setToken } from "../api";
 
 const SignupPage = () => {
-    const [formData, setFormData] = useState({});
-    const history = useHistory();
+  const [formData, setFormData] = useState({});
+  const history = useHistory();
 
-    const updateData = (e) =>{
-        const key = e.currentTarget.name;
+  const updateData = (e) => {
+    const key = e.currentTarget.name;
 
-        const value = e.currentTarget.value;
-        let obj = {...formData}
-        obj[key] = value;
-        setFormData(obj);
-    }
+    const value = e.currentTarget.value;
+    let obj = { ...formData };
+    obj[key] = value;
+    setFormData(obj);
+  };
 
-
-const submit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
-    const response = await signupApi(formData).catch((error) =>{
-        console.log(error);
-    })
-    history.push('/login');
-}
+    const response = await signupApi(formData).catch((error) => {
+      console.log(error);
+    });
+    history.push("/login");
+  };
 
-
-    return (
-        <div>
-          <h1>signup page</h1>
-    
+  return (
+    <Container>
+      <Row>
+        <Col>
+        <h1>Create a new account</h1>
           <Form onSubmit={submit}>
             <FormGroup>
               <Label for="name">Username</Label>
@@ -42,11 +50,11 @@ const submit = async (e) => {
             </FormGroup>
             <Button>Submit</Button>
           </Form>
-        </div>
-      );
+        </Col>
+      </Row>
 
-
-
+    </Container>
+  );
 };
 
 export default SignupPage;

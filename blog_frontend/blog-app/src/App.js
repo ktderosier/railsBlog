@@ -48,14 +48,15 @@ function App() {
             </Link>
           </Nav>
           <Nav className="ml-auto">
-            {loggedIn ? <Button variant="secondary" onClick={logout}>Sign out</Button> :
-                         <Link to="/login">
-                         <Button variant="secondary">Sign in</Button>
-                       </Link>
-                       }
-            {/* <Button variant="secondary" onClick={logout}>
-              {loggedIn ? "Sign out" : "Sign in" }
-            </Button> */}
+            {loggedIn ? (
+              <Button variant="secondary" onClick={logout}>
+                Sign out
+              </Button>
+            ) : (
+              <Link to="/login">
+                <Button variant="secondary">Sign in</Button>
+              </Link>
+            )}
 
             <Link to="/signup">
               {loggedIn ? null : (
@@ -86,7 +87,7 @@ function App() {
             <SignupPage />
           </Route>
 
-          <Route exact path={"/api/blogs/:id"}>
+          <Route exact path={"/api/blogs"}>
             <CreateBlog />
           </Route>
         </Switch>
