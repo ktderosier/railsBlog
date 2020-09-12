@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import Blogs from "./components/Blogs";
 import SingleBlog from "./components/SingleBlog";
 import SignupPage from "./components/Signup";
+import CreateBlog from "./components/CreateBlog";
 
 const intializeLogin = () => {
   if (window.localStorage.getItem("token")) {
@@ -47,9 +48,14 @@ function App() {
             </Link>
           </Nav>
           <Nav className="ml-auto">
-            <Button variant="secondary" onClick={logout}>
-              {loggedIn ? "Sign out" : "Sign in"}
-            </Button>
+            {loggedIn ? <Button variant="secondary" onClick={logout}>Sign out</Button> :
+                         <Link to="/login">
+                         <Button variant="secondary">Sign in</Button>
+                       </Link>
+                       }
+            {/* <Button variant="secondary" onClick={logout}>
+              {loggedIn ? "Sign out" : "Sign in" }
+            </Button> */}
 
             <Link to="/signup">
               {loggedIn ? null : (
@@ -78,6 +84,10 @@ function App() {
 
           <Route exact path="/signup">
             <SignupPage />
+          </Route>
+
+          <Route exact path={"/api/blogs/:id"}>
+            <CreateBlog />
           </Route>
         </Switch>
       </Router>

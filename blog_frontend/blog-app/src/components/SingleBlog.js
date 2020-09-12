@@ -13,10 +13,8 @@ import { useHistory } from "react-router-dom";
 
 const SingleBlog = () => {
   const [blog, setBlog] = useState({});
-  const [edit, setEdit] = useState({});
   const [formData, setFormData] = useState({});
   const history = useHistory();
-
   const { id } = useParams();
 
   useEffect(() => {
